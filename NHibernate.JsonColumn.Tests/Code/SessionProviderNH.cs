@@ -2,7 +2,6 @@ using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
 using NHibernate.Dialect;
 using NHibernate.Driver;
-using NHibernate.JsonColumn.Tests.NHMaps;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using System.Configuration;
@@ -49,7 +48,7 @@ namespace NHibernate.JsonColumn.Tests.Code
             finally
             {
                 s.Stop();
-                Debug.Print($"Fluently.Configure() - {s.ElapsedMilliseconds}ms");
+                Debug.Print($"NHibernate configuration - {s.ElapsedMilliseconds}ms");
             }
         }
 

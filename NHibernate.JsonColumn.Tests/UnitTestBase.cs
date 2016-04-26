@@ -1,3 +1,5 @@
+using System.Linq;
+using Either_For_JsonNet;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using NHibernate.JsonColumn.Tests.Code;
@@ -12,7 +14,13 @@ namespace NHibernate.JsonColumn.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            JsonConvert.DefaultSettings = FluentJsonNet.JsonMaps.GetDefaultSettings(typeof(UnitTestBase).Assembly.GetTypes());
+            var settings = FluentJsonNet.JsonMaps.GetDefaultSettings(typeof(UnitTestBase).Assembly.GetTypes())();
+            settings.Converters = settings.Converters.Concat(new[] { new EitherJsonConverter(), }).ToList().AsReadOnly();
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                Converters = settings.Converters,
+                ContractResolver = settings.ContractResolver,
+            };
             this.SessionProvider = new SessionProviderNH();
             this.Session = this.SessionProvider.SessionFactory.OpenSession();
         }

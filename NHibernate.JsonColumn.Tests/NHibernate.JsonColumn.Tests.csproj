@@ -85,6 +85,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Code\FluentExtensions.cs" />
     <Compile Include="Code\Database.cs" />
     <Compile Include="Code\SessionProviderNH.cs" />
     <Compile Include="JsonMaps\AnimalMap.cs" />

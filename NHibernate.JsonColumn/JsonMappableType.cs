@@ -6,19 +6,42 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using NHibernate.JsonColumn.JetBrains.Annotations;
 
 namespace NHibernate.JsonColumn
 {
-    public class JsonMappableType<T> : IUserType
+    public class JsonMappableType<T> :
+        IUserType
     {
         // http://blog.denouter.net/2015/03/json-serialized-object-in-nhibernate.html
 
+        /// <summary>
+        /// Restores an object that has been stored in NHibernate cache, when cache is enabled.
+        /// </summary>
+        /// <param name="cached"></param>
+        /// <param name="owner"></param>
+        /// <returns></returns>
         public object Assemble(object cached, object owner)
         {
             //Used for caching, as our object is immutable we can just return it as is
-            return cached;
+            return FromJson((string)cached);
         }
 
+        /// <summary>
+        /// Returns a value that will be stored in the NHibernate cache, when cache is enabled.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public object Disassemble(object value)
+        {
+            return ToJson((T)value);
+        }
+
+        /// <summary>
+        /// Creates a deep clone of the given object.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public object DeepCopy(object value)
         {
             //We deep copy the Translation by creating a new instance with the same contents
@@ -28,12 +51,6 @@ namespace NHibernate.JsonColumn
                 throw new Exception($"Invalid type of value in property. It should be `{nameof(T)}`.");
             var result = FromJson(ToJson((T)value));
             return result;
-        }
-
-        public object Disassemble(object value)
-        {
-            //Used for caching, as our object is immutable we can just return it as is
-            return value;
         }
 
         public new bool Equals(object x, object y)
@@ -102,7 +119,7 @@ namespace NHibernate.JsonColumn
             Formatting = Formatting.None,
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+            DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
         };
 
         public static T FromJson(string jsonString)
