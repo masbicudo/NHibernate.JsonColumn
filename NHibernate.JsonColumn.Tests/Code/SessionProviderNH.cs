@@ -25,21 +25,22 @@ namespace NHibernate.JsonColumn.Tests.Code
 
         public SessionProviderNH()
         {
+            var connStrName = "TestDB";
+
             var s = Stopwatch.StartNew();
             try
             {
                 #region NHibernate configuration
 
-                this.NHConfiguration = ConfigureNHibernate();
-
+                var connStr = ConfigurationManager.ConnectionStrings[connStrName].ConnectionString;
+                new MsSqlDatabase(connStr).CreateDatabaseMedia();
+                this.NHConfiguration = ConfigureNHibernate(connStr);
                 this.SessionFactory = this.NHConfiguration.BuildSessionFactory();
 
-                string connStr;
-                if (!this.NHConfiguration.Properties.TryGetValue(Environment.ConnectionString, out connStr))
-                    if (this.NHConfiguration.Properties.TryGetValue(Environment.ConnectionStringName, out connStr))
-                        connStr = ConfigurationManager.ConnectionStrings[connStr]?.ConnectionString;
-
-                new MsSql2008Database(connStr).CreateDatabaseMedia();
+                //string connStr;
+                //if (!this.NHConfiguration.Properties.TryGetValue(Environment.ConnectionString, out connStr))
+                //    if (this.NHConfiguration.Properties.TryGetValue(Environment.ConnectionStringName, out connStr))
+                //        connStr = ConfigurationManager.ConnectionStrings[connStr]?.ConnectionString;
 
                 new SchemaUpdate(this.NHConfiguration).Execute(false, true);
 
@@ -52,7 +53,7 @@ namespace NHibernate.JsonColumn.Tests.Code
             }
         }
 
-        private static Configuration ConfigureNHibernate()
+        private static Configuration ConfigureNHibernate(string connStr)
         {
             var configure = new Configuration();
             configure.SessionFactoryName("BuildIt");
@@ -64,7 +65,7 @@ namespace NHibernate.JsonColumn.Tests.Code
                 db.KeywordsAutoImport = Hbm2DDLKeyWords.AutoQuote;
                 db.IsolationLevel = IsolationLevel.ReadCommitted;
 
-                db.ConnectionStringName = "TestDB";
+                db.ConnectionString = connStr;
                 db.Timeout = 10;
 
                 // enabled for testing

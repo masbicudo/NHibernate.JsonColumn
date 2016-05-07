@@ -107,7 +107,7 @@
     <Compile Include="Models\Motorcycle.cs" />
     <Compile Include="Models\Root.cs" />
     <Compile Include="Models\Vehicle.cs" />
-    <Compile Include="Code\MsSql2008Database.cs" />
+    <Compile Include="Code\MsSqlDatabase.cs" />
     <Compile Include="NHMaps\RootFluentNHMap.cs" />
     <Compile Include="NHMaps\RootNHMap.cs" />
     <Compile Include="Code\SessionProviderFluentNH.cs" />

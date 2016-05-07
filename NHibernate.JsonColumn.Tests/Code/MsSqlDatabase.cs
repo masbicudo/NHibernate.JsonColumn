@@ -6,7 +6,10 @@ using System.Linq;
 
 namespace NHibernate.JsonColumn.Tests.Code
 {
-    public class MsSql2008Database : Database
+    /// <summary>
+    /// Tools to work with MS SQL Server Databases.
+    /// </summary>
+    public class MsSqlDatabase : Database
     {
         public override void CreateDatabaseMedia()
         {
@@ -121,7 +124,7 @@ select
             return null;
         }
 
-        public MsSql2008Database(string connectionString)
+        public MsSqlDatabase(string connectionString)
             : base(connectionString)
         {
         }

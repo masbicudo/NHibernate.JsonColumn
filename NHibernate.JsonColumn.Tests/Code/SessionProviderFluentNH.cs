@@ -1,9 +1,10 @@
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using System.Configuration;
 using System.Diagnostics;
 using System.Reflection;
+using Configuration = NHibernate.Cfg.Configuration;
 
 namespace NHibernate.JsonColumn.Tests.Code
 {
@@ -25,6 +26,8 @@ namespace NHibernate.JsonColumn.Tests.Code
             var s = Stopwatch.StartNew();
             try
             {
+                var connStr = ConfigurationManager.ConnectionStrings[connStrName].ConnectionString;
+                new MsSqlDatabase(connStr).CreateDatabaseMedia();
                 Configuration gotConfig = null;
                 this.SessionFactory = Fluently.Configure()
                     .Database(
@@ -34,7 +37,7 @@ namespace NHibernate.JsonColumn.Tests.Code
                         cfg =>
                         {
                             gotConfig = cfg;
-                            new MsSql2008Database(cfg.Properties[Environment.ConnectionString]).CreateDatabaseMedia();
+                            //new MsSqlDatabase(cfg.Properties[Environment.ConnectionString]).CreateDatabaseMedia();
                             new SchemaUpdate(cfg).Execute(false, true);
                         })
                     //.ExposeConfiguration(cfg => cfg.Properties.Add("use_proxy_validator", "false"))
