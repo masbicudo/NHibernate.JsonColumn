@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NHibernate.JsonColumn</id>
+    <version>0.0.0</version>
+    <title>NHibernate Json Column by MASBicudo</title>
+    <authors>Miguel Angelo (masbicudo)</authors>
+    <owners>Miguel Angelo</owners>
+    <licenseUrl>https://github.com/masbicudo/NHibernate.JsonColumn/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/masbicudo/NHibernate.JsonColumn</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/masbicudo/NHibernate.JsonColumn/master/NHibernate.JsonColumn/icon-256.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>
+        Allows saving a property as a JSON string in the DB.
+        Uses Json.NET to serialize and deserialize.
+        Implemented as an IUserType.
+    </summary>
+    <description>
+        See the project page for more.
+    </description>
+    <releaseNotes>
+        0.0.0 - initial release
+        See the project page for more.
+    </releaseNotes>
+    <copyright>Copyright MASBicudo 2016</copyright>
+    <tags>
+        nhibernate json column IUserType Json.NET json masbicudo masb miguel angelo
+    </tags>
+  </metadata>
+</package>

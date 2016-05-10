@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using JetBrains.Annotations;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NHibernate.SqlTypes;
 using NHibernate.UserTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using NHibernate.JsonColumn.JetBrains.Annotations;
 
 namespace NHibernate.JsonColumn
 {
