@@ -3,7 +3,7 @@ using NHibernate.JsonColumn.Tests.Models;
 
 namespace NHibernate.JsonColumn.Tests.JsonMaps
 {
-    public class GiraffeMap : JsonMap<Giraffe>
+    public class GiraffeMap : JsonSubclassMap<Giraffe>
     {
         public GiraffeMap()
         {

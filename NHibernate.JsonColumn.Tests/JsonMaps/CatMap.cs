@@ -3,7 +3,7 @@ using NHibernate.JsonColumn.Tests.Models;
 
 namespace NHibernate.JsonColumn.Tests.JsonMaps
 {
-    public class CatMap : JsonMap<Cat>
+    public class CatMap : JsonSubclassMap<Cat>
     {
         public CatMap()
         {

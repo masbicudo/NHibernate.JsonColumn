@@ -3,7 +3,7 @@ using NHibernate.JsonColumn.Tests.UseCase.ToComFome.JsonModels;
 
 namespace NHibernate.JsonColumn.Tests.UseCase.ToComFome.JsonMaps
 {
-    public class CustomEnumEditorControlModelMap : JsonMap<CustomEnumEditorControlModel>
+    public class CustomEnumEditorControlModelMap : JsonSubclassMap<CustomEnumEditorControlModel>
     {
         public CustomEnumEditorControlModelMap()
         {

@@ -3,7 +3,7 @@ using NHibernate.JsonColumn.Tests.UseCase.ToComFome.JsonModels;
 
 namespace NHibernate.JsonColumn.Tests.UseCase.ToComFome.JsonMaps
 {
-    public class LayoutControlModelMap : JsonMap<LayoutControlModel>
+    public class LayoutControlModelMap : JsonSubclassMap<LayoutControlModel>
     {
         public LayoutControlModelMap()
         {
